@@ -7,18 +7,18 @@ public class Transactions {
 	private Account account;
 	private float amount;
 	private Date created_at;
-	private TransactionType transaction_type;
+	private TransactionType transactionType;
 	public Transactions() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Transactions(int id, Account account, float amount, Date created_at, TransactionType transaction_type) {
+	public Transactions(int id, Account account, float amount, Date created_at, TransactionType transactionType) {
 		super();
 		this.id = id;
 		this.account = account;
 		this.amount = amount;
 		this.created_at = created_at;
-		this.transaction_type = transaction_type;
+		this.transactionType = transactionType;
 	}
 	public int getId() {
 		return id;
@@ -44,41 +44,11 @@ public class Transactions {
 	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
 	}
-	public TransactionType getTransaction_type() {
-		return transaction_type;
+	public TransactionType getTransactionType() {
+		return transactionType;
 	}
-	public void setTransaction_type(TransactionType transaction_type) {
-		this.transaction_type = transaction_type;
+	public void setTransactionType(TransactionType transactionType) {
+		this.transactionType = transactionType;
 	}
-	
-	
-}
-
-
-class TransactionType {
-	private String transaction_code;
-	private String description;
-	public TransactionType() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public TransactionType(String transaction_code, String description) {
-		super();
-		this.transaction_code = transaction_code;
-		this.description = description;
-	}
-	public String getTransaction_code() {
-		return transaction_code;
-	}
-	public void setTransaction_code(String transaction_code) {
-		this.transaction_code = transaction_code;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
 	
 }
