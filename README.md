@@ -3,10 +3,12 @@
 
 ### Programming Languages
 1. Backend
-    - Java
+    - Servlets
+    - MySQL
 2. Frontend
     - Html
     - CSS
+    - JSP
     - Js bootstrap framework
   
  
