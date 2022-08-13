@@ -3,17 +3,17 @@ package com.lambton.models;
 import java.sql.Date;
 
 public class Customer {
-	private int id;
-	private int agent_id;
+	private int id; ////no need
+	private int agent_id; ////no need
 	private String username;
 	private String password;
 	private String email;
 	private String address;
 	private String firstname;
 	private String lastname;
-	private Date created_date;
+	private Date created_date; ////no need
 	private int age;
-	private boolean email_verify;
+	private boolean email_verify; //no need
 	
 	
 
