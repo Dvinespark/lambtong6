@@ -12,7 +12,11 @@ public class Customer {
 	private String firstname;
 	private String lastname;
 	private Date created_date;
+	private int age;
+	private boolean email_verify;
 	
+	
+
 	
 	public Customer() {
 		super();
@@ -23,8 +27,14 @@ public class Customer {
 
 
 
+
+
+
+
+
+
 	public Customer(int id, int agent_id, String username, String password, String email, String address,
-			String firstname, String lastname, Date created_date) {
+			String firstname, String lastname, Date created_date, int age, boolean email_verify) {
 		super();
 		this.id = id;
 		this.agent_id = agent_id;
@@ -35,11 +45,9 @@ public class Customer {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.created_date = created_date;
+		this.age = age;
+		this.email_verify = email_verify;
 	}
-
-
-
-
 
 	public int getId() {
 		return id;
@@ -140,6 +148,23 @@ public class Customer {
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public boolean isEmail_verify() {
+		return email_verify;
+	}
+
+
+	public void setEmail_verify(boolean email_verify) {
+		this.email_verify = email_verify;
 	}
 	
 }

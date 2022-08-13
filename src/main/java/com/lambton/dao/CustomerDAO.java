@@ -1,6 +1,7 @@
 package com.lambton.dao;
 
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -34,7 +35,8 @@ public class CustomerDAO {
 			{
 				customer = new Customer(rs.getInt("id"),rs.getInt("agent_id"), rs.getString("username"),
 						rs.getString("password"), rs.getString("email"), rs.getString("address"),
-						rs.getString("firstname"), rs.getString("lastname"), rs.getDate("created_date"));
+						rs.getString("firstname"), rs.getString("lastname"), rs.getDate("created_date"),
+						rs.getInt("age"), rs.getBoolean("email_verify"));
 				 
 			}
 			else {
@@ -50,7 +52,7 @@ public class CustomerDAO {
 	
 	public int AddCustomer(Customer customer) {
 		int status = 0;
-		String sql="insert into customer(agent_id, username, password, email, address, firstname, lastname) "
+		String sql="insert into customer(agent_id, username, password, email, address, firstname, lastname, age, email_verify) "
 				+ "values(?,?,?,?,?,?,?)";
 
 		//For Select statement we can use Connection Interface
@@ -63,6 +65,8 @@ public class CustomerDAO {
 			stmt.setString(5, customer.getAddress());
 			stmt.setString(6, customer.getFirstname());
 			stmt.setString(7, customer.getLastname());
+			stmt.setInt(8, customer.getAge());
+			stmt.setBoolean(9, customer.isEmail_verify());
 			
 			status=stmt.executeUpdate();
 			if(status>0)
@@ -94,7 +98,8 @@ public class CustomerDAO {
 			{
 				customer = new Customer(rs.getInt("id"),rs.getInt("agent_id"), rs.getString("username"),
 						rs.getString("password"), rs.getString("email"), rs.getString("address"),
-						rs.getString("firstname"), rs.getString("lastname"), rs.getDate("created_date"));
+						rs.getString("firstname"), rs.getString("lastname"), rs.getDate("created_date"),
+						rs.getInt("age"), rs.getBoolean("email_verify"));
 				 
 			}
 			else {
