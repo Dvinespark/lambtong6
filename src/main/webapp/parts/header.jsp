@@ -58,12 +58,12 @@
 						<li><a href="/lambtong6/#home-section" class="nav-link">Home</a></li>
 						<li><a href="/lambtong6/#about-section" class="nav-link">About Us</a></li>
 						<li><a href="/lambtong6/#contact-section" class="nav-link">Contact</a></li>
-						<% if (session_obj.login_flag == true){%>
+<%-- 						<% if (session_obj.login_flag == true){%>
 							<li><a href="#" class="nav-link">Welcome <%= session_obj.firstname %></a></li>
 							<li><a href="<%=request.getContextPath() + "/login?logout=true" %>" class="nav-link">Log out</a></li>
 						<%}else {%>
 							<li><a href="login" class="nav-link">Sign in</a></li>
-						<%}%>
+						<%}%> --%>
 						
 						
 

@@ -30,7 +30,7 @@ CREATE TABLE BANK (
 ALTER TABLE BANK AUTO_INCREMENT = 1000;
 
 
-CREATE TABLE ACCOUNT (
+CREATE TABLE CUSTOMER (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	agent_id INT NOT NULL,
     firstname NVARCHAR(50) NOT NULL,
@@ -38,10 +38,19 @@ CREATE TABLE ACCOUNT (
     age INT NOT NULL,
 	username NVARCHAR(50) NOT NULL,
     password NVARCHAR(30) NOT NULL,
+    email_verfiy BOOLEAN DEFAULT FALSE,
 	email NVARCHAR(100) NOT NULL,
+    address NVARCHAR(100)  NOT NULL,
+    created_date DATE DEFAULT current_timestamp,
+	CONSTRAINT fk_agent_id
+    foreign key(agent_id) REFERENCES AGENT(id)
+);
+
+CREATE TABLE ACCOUNT (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	customer_id INT NOT NULL,
     account_types_code NVARCHAR(15) NOT NULL,
     bank_id INT NOT NULL,
-    address NVARCHAR(100)  NOT NULL,
     created_date DATE DEFAULT current_timestamp,
     balance float(10,2) default 0,
 	CONSTRAINT fk_account_types_code
@@ -50,8 +59,8 @@ CREATE TABLE ACCOUNT (
 	CONSTRAINT fk_bank_id
     foreign key(bank_id) REFERENCES BANK(id),
     
-	CONSTRAINT fk_agent_id
-    foreign key(agent_id) REFERENCES AGENT(id)
+	CONSTRAINT fk_customer_id
+    foreign key(customer_id) REFERENCES CUSTOMER(id)
 );
 
 
