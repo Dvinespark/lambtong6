@@ -3,7 +3,7 @@ package com.lambton.models;
 import java.sql.Date;
 
 public class Account {
-	private int id;
+	private int id; //no need
 	private int customer_id;
 	private AccountTypes accountTypes;
 	private Bank bank;
