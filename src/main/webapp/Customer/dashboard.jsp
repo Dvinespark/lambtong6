@@ -20,11 +20,6 @@
 
 	</div>
 </div>
-
-
-
-
-
 <div class="container p-5">
 	<h2 class="card-title">Account information:</h2>
 	<div class="card">

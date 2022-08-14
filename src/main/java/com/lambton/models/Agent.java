@@ -56,4 +56,13 @@ public class Agent {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Agent [firstname=" + firstname + ", lastname=" + lastname + ", username=" + username + ", password="
+				+ password + "]";
+	}
+	
+	
+
+
 }

@@ -24,17 +24,17 @@ public class AgentDAO {
 	
 	public Agent login(String username, String password) {
 		Agent agent = null;
-		String sql="select * from agent where username=? and password=?";
+		String sql="SELECT * FROM agent WHERE username = ? AND password = ?;";
 
 		//For Select statement we can use Connection Interface
 		try {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
 			stmt.setString(1, username);
 			stmt.setString(2, password);
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
 			if(rs.next())
 			{
-				 agent= new Agent(rs.getInt("id"),rs.getString("firstname"),rs.getString("lastname"),rs.getString("username"),rs.getString("password"));
+				 agent= new Agent(rs.getInt("id"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("password"));
 
 			}
 			else {
@@ -47,5 +47,5 @@ public class AgentDAO {
 		}	
 		return agent;	
 	}
-
+	
 }
