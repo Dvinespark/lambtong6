@@ -13,8 +13,8 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/longe/Documents/Java Servers/apache-tomcat-10.0.23/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/longe/Documents/Java Servers/apache-tomcat-10.0.23/lib/tomcat-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/longe/Downloads/mysql-connector-java-8.0.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chidv/Downloads/OneDrive - Lambton College/Term 3/Java EE/apache-tomcat-10.0.21/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chidv/Downloads/OneDrive - Lambton College/Term 3/Java EE/apache-tomcat-10.0.21/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chidv/Downloads/OneDrive - Lambton College/Term 3/Java EE/mysql-connector.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
