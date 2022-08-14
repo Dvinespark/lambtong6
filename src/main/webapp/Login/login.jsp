@@ -1,3 +1,4 @@
+
 <%@include file="/parts/header.jsp"%>
 
 <div id="LoginForm">
@@ -35,9 +36,17 @@
 									class="form-check-label" for="login_type2"> Customer </label>
 							</div>
 							<div class="col-4"></div>
+							<%
+							if (session_obj.login_flag == false) {
+							%>
 							<div class="col-4">
-								<a href="reset.jsp">Forgot password?</a>
+								<a id="_create_account" href="<%= request.getContextPath() + "/register" %>">Create Account</a>
 							</div>
+
+							<%
+							}
+							%>
+
 						</div>
 					</div>
 					<button type="submit" class="btn btn-primary">Login</button>

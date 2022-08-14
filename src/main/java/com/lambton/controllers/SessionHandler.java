@@ -1,7 +1,5 @@
 package com.lambton.controllers;
 
-import jakarta.servlet.http.HttpSession;
-
 public class SessionHandler {
 	public Integer agent_id;
 	public Integer customer_id;

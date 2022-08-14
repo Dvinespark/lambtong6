@@ -341,3 +341,17 @@ jQuery(document).ready(function($) {
 	});
 
 });
+
+
+
+
+$(document).ready(function() {
+	console.log("hello world");
+	$("#login_type1").click(()=>{
+		$("#_create_account").hide();
+	});
+	
+		$("#login_type2").click(()=>{
+			$("#_create_account").show();
+	});
+});

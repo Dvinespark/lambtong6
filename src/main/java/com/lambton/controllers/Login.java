@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.lambton.dao.AgentDAO;
 import com.lambton.dao.CustomerDAO;
-import com.lambton.models.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,15 +38,25 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("get: /lambtong6/login");
-		sessionHandler = new SessionHandler();
-		session.setAttribute("lambton_session", sessionHandler);
-		request.getRequestDispatcher("Login/login.jsp").forward(request, response);
+		System.out.println("get: /lambtong6/login page");
+		System.out.println(request.getParameter("logout"));
+		
+		if (request.getParameter("logout")!= null) {
+			logout(request, response);
+		}
+		else {
+			request.getRequestDispatcher("Login/login.jsp").forward(request, response);
+		}
+		
 	}
+	
+	protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+		HttpSession session = request.getSession();
+		session.removeAttribute("lambton_session");
+		response.sendRedirect(request.getContextPath());
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("post: /lambtong6/login");

@@ -25,15 +25,15 @@ public class Home extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("get: /lambtong6");
 		session = request.getSession();
-		
-		// initialize session with empty values
-		sessionHandler = new SessionHandler();
-		session.setAttribute("lambton_session", sessionHandler);
+		if (session.getAttribute("lambton_session") == null) {
+			sessionHandler = new SessionHandler(0,0,false,"Home", "","","");
+			session.setAttribute("lambton_session", sessionHandler);
+		}
 		
 		request.getRequestDispatcher("Home/index.jsp").forward(request, response);
 
 	}
-
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
