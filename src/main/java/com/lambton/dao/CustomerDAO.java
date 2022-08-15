@@ -1,9 +1,9 @@
 package com.lambton.dao;
 
-
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.lambton.models.Customer;
 import com.mysql.jdbc.Connection;
@@ -30,7 +30,7 @@ public class CustomerDAO {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
 			stmt.setString(1, username);
 			stmt.setString(2, password);
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
 			if(rs.next())
 			{
 				customer = new Customer(rs.getInt("id"),rs.getInt("agent_id"), rs.getString("username"),
@@ -53,7 +53,7 @@ public class CustomerDAO {
 	public int AddCustomer(Customer customer) {
 		int status = 0;
 		String sql="insert into customer(agent_id, username, password, email, address, firstname, lastname, age, email_verify) "
-				+ "values(?,?,?,?,?,?,?)";
+				+ "values(?,?,?,?,?,?,?,?,?)";
 
 		//For Select statement we can use Connection Interface
 		try {
@@ -93,7 +93,7 @@ public class CustomerDAO {
 		try {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
 			stmt.setInt(1, id);
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
 			if(rs.next())
 			{
 				customer = new Customer(rs.getInt("id"),rs.getInt("agent_id"), rs.getString("username"),
@@ -126,11 +126,10 @@ public class CustomerDAO {
 			stmt.setString(2, customer.getFirstname());
 			stmt.setString(3, customer.getLastname());
 
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
 			if(rs.next())
 			{
 				status = 1;				// exists
-
 				 
 			}
 			else {
@@ -141,6 +140,32 @@ public class CustomerDAO {
 			e.printStackTrace();
 		}	
 		return status;	
+	}
+	
+	
+	public List<Customer> getCustomers() {
+		List<Customer> customers = new ArrayList<Customer>();
+		String sql="select * from customer;";
+
+		//For Select statement we can use Connection Interface
+		try {
+			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
+			while(rs.next())
+			{
+				Customer customer = new Customer(rs.getInt("id"),rs.getInt("agent_id"), rs.getString("username"),
+						rs.getString("password"), rs.getString("email"), rs.getString("address"),
+						rs.getString("firstname"), rs.getString("lastname"), rs.getDate("created_date"),
+						rs.getInt("age"), rs.getBoolean("email_verify"));
+				customers.add(customer);
+				 
+			}
+		} 	
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return customers;	
 	}
 	
 	

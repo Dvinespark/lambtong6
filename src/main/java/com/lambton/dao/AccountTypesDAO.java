@@ -23,21 +23,18 @@ public class AccountTypesDAO {
 	
 	@SuppressWarnings("null")
 	public List<AccountTypes> getAccountTypeList() {
-		List<AccountTypes> accountTypes = null;
-		String sql="select * from AccountTypes;";
+		List<AccountTypes> accountTypes = new ArrayList<AccountTypes>();
+		String sql="select * from Account_Types;";
 
 		//For Select statement we can use Connection Interface
 		try {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
-			if(rs.next())
+			ResultSet rs=(ResultSet) stmt.executeQuery();
+			while(rs.next())
 			{
-				 AccountTypes accountType = new AccountTypes(rs.getString("account_types_code"),rs.getString("description"));
+				 AccountTypes accountType = new AccountTypes(rs.getString("account_type_code"),rs.getString("description"));
 				 accountTypes.add(accountType);
 
-			}
-			else {
-				accountTypes = new ArrayList<AccountTypes>();
 			}
 		} 	
 		catch (SQLException e) {
@@ -49,16 +46,16 @@ public class AccountTypesDAO {
 	
 	public AccountTypes getAccountTypesByCode(String account_types_code) {
 		AccountTypes accountType = null;
-		String sql="select * from Bank where account_types_code = ?";
+		String sql="select * from Account_Types where account_types_code = ?";
 
 		//For Select statement we can use Connection Interface
 		try {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
 			stmt.setString(1, account_types_code);
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
 			if(rs.next())
 			{
-				accountType = new AccountTypes(rs.getString("account_types_code"),rs.getString("description"));
+				accountType = new AccountTypes(rs.getString("account_type_code"),rs.getString("description"));
 
 			}
 			else {

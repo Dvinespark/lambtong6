@@ -28,9 +28,9 @@ public class AccountDAO {
 		this.bankDAO = new BankDAO();
 	}
 	
-	@SuppressWarnings("null")
+
 	public List<Account> getAccounts(int customerId) {
-		List<Account> accounts = null;
+		List<Account> accounts = new ArrayList<Account>();
 		String sql="select * from account where customer_id=?;";
 
 		//For Select statement we can use Connection Interface
@@ -39,8 +39,8 @@ public class AccountDAO {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
 			stmt.setInt(1, customerId);
 
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
-			if(rs.next())
+			ResultSet rs=(ResultSet) stmt.executeQuery();
+			while(rs.next())
 			{
 				Bank bank = this.bankDAO.getBankById(rs.getInt("bank_id"));
 				AccountTypes accountTypes = this.accountTypesDAO.getAccountTypesByCode("account_types_code");				
@@ -48,9 +48,6 @@ public class AccountDAO {
 						rs.getDate("created_date"), rs.getFloat("balance"));
 				accounts.add(account);
 				 
-			}
-			else {
-				accounts = new ArrayList<Account>();
 			}
 		} 	
 		catch (SQLException e) {
@@ -73,7 +70,7 @@ public class AccountDAO {
 			stmt.setString(2, account.getAccountTypes().getAccount_types_code());
 			stmt.setInt(3, account.getBank().getId());
 
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
 			if(rs.next())
 			{
 				status = 1;				
@@ -162,7 +159,7 @@ public class AccountDAO {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
 			stmt.setInt(1, account_id);
 
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
 			if(rs.next())
 			{
 				Bank bank = this.bankDAO.getBankById(rs.getInt("bank_id"));

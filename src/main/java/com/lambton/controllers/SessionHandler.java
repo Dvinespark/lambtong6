@@ -8,6 +8,7 @@ public class SessionHandler {
 	public String error_message;
 	public String login_type;
 	public String firstname;
+	public String message;
 	
 	
 	public SessionHandler() {
@@ -17,7 +18,7 @@ public class SessionHandler {
 
 
 	public SessionHandler(Integer agent_id, Integer customer_id, boolean login_flag, String page_title,
-			String error_message, String login_type, String firstname) {
+			String error_message, String login_type, String firstname, String message) {
 		super();
 		this.agent_id = agent_id;
 		this.customer_id = customer_id;
@@ -26,6 +27,7 @@ public class SessionHandler {
 		this.error_message = error_message;
 		this.login_type = login_type;
 		this.firstname = firstname;
+		this.message = message;
 	}
 	
 

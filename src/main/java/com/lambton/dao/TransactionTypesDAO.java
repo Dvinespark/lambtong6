@@ -23,21 +23,18 @@ public class TransactionTypesDAO {
 	
 	@SuppressWarnings("null")
 	public List<TransactionType> getTransactionTypeList() {
-		List<TransactionType> transactionTypes = null;
-		String sql="select * from AccountTypes;";
+		List<TransactionType> transactionTypes = new ArrayList<TransactionType>();
+		String sql="select * from transaction_types;";
 
 		//For Select statement we can use Connection Interface
 		try {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
-			if(rs.next())
+			ResultSet rs=(ResultSet) stmt.executeQuery();
+			while(rs.next())
 			{
 				TransactionType transactionType = new TransactionType(rs.getString("transaction_code"),rs.getString("description"));
 				 transactionTypes.add(transactionType);
 
-			}
-			else {
-				transactionTypes = new ArrayList<TransactionType>();
 			}
 		} 	
 		catch (SQLException e) {
@@ -47,15 +44,15 @@ public class TransactionTypesDAO {
 		return transactionTypes;	
 	}
 	
-	public TransactionType getTransactionTypeByCode(String account_types_code) {
+	public TransactionType getTransactionTypeByCode(String transaction_code) {
 		TransactionType transactionType = null;
-		String sql="select * from Bank where account_types_code = ?";
+		String sql="select * from transaction_types where transaction_code = ?";
 
 		//For Select statement we can use Connection Interface
 		try {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
-			stmt.setString(1, account_types_code);
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
+			stmt.setString(1, transaction_code);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
 			if(rs.next())
 			{
 				transactionType = new TransactionType(rs.getString("transaction_code"),rs.getString("description"));

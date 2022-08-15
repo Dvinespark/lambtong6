@@ -1,7 +1,6 @@
 package com.lambton.controllers;
 import java.io.IOException;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,7 +25,7 @@ public class Home extends HttpServlet {
 		System.out.println("get: /lambtong6");
 		session = request.getSession();
 		if (session.getAttribute("lambton_session") == null) {
-			sessionHandler = new SessionHandler(0,0,false,"Home", "","","");
+			sessionHandler = new SessionHandler(0,0,false,"Home", "","","","");
 			session.setAttribute("lambton_session", sessionHandler);
 		}
 		
@@ -40,5 +39,7 @@ public class Home extends HttpServlet {
 		System.out.println("Post method triggered.");	
 		response.sendRedirect("display.jsp");	
 	}
+	
+
 
 }

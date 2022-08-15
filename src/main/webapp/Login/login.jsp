@@ -10,6 +10,17 @@
 					<h2>Login Portal</h2>
 					<p>Login with your username and password.</p>
 				</div>
+				<div class="p-5 text-danger">
+												<%
+							if (session_obj.login_flag == false && session_obj.error_message.length() > 0) {
+							%>
+							<p>Error: <%= session_obj.error_message %> </p>
+
+							<%
+							}
+							%>
+							
+				</div>
 				<form method="post" action="login">
 
 					<div class="form-group">
@@ -40,7 +51,7 @@
 							if (session_obj.login_flag == false) {
 							%>
 							<div class="col-4">
-								<a id="_create_account" href="<%= request.getContextPath() + "/register" %>">Create Account</a>
+								<a id="_create_account" href="<%= request.getContextPath() + "/recover_account" %>">Forgot Password</a>
 							</div>
 
 							<%

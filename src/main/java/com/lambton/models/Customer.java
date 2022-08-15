@@ -27,7 +27,19 @@ public class Customer {
 
 
 
-
+	public Customer(int agent_id, String username, String password, String email, String address,
+			String firstname, String lastname, int age, boolean email_verify) {
+		super();
+		this.agent_id = agent_id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.address = address;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.age = age;
+		this.email_verify = email_verify;
+	}
 
 
 
@@ -48,6 +60,7 @@ public class Customer {
 		this.age = age;
 		this.email_verify = email_verify;
 	}
+	
 
 	public int getId() {
 		return id;

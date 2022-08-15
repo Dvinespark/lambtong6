@@ -22,23 +22,20 @@ public class BankDAO {
 	}
 	
 	
-	@SuppressWarnings("null")
 	public List<Bank> getBankList() {
-		List<Bank> banks = null;
+		List<Bank> banks = new ArrayList<Bank>();
 		String sql="select * from Bank;";
 
 		//For Select statement we can use Connection Interface
 		try {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
-			if(rs.next())
+			ResultSet rs=(ResultSet) stmt.executeQuery();
+			while(rs.next())
 			{
 				 Bank bank = new Bank(rs.getInt("id"),rs.getString("name"));
 				 banks.add(bank);
+				 System.out.println(bank);
 
-			}
-			else {
-				banks = new ArrayList<Bank>();
 			}
 		} 	
 		catch (SQLException e) {
@@ -56,7 +53,7 @@ public class BankDAO {
 		try {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
 			stmt.setInt(1, bank_id);
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
 			if(rs.next())
 			{
 				 bank = new Bank(rs.getInt("id"),rs.getString("name"));

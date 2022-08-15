@@ -48,4 +48,29 @@ public class AgentDAO {
 		return agent;	
 	}
 	
+	public Agent getAgentById(int id) {
+		Agent agent = null;
+		String sql="SELECT * FROM agent WHERE id = ?;";
+
+		//For Select statement we can use Connection Interface
+		try {
+			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs=(ResultSet) stmt.executeQuery();
+			if(rs.next())
+			{
+				 agent= new Agent(rs.getInt("id"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("password"));
+
+			}
+			else {
+				agent = new Agent();
+			}
+		} 	
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return agent;	
+	}
+	
 }

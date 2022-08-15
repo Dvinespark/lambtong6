@@ -29,9 +29,9 @@ public class TransactionsDAO {
 		this.transactionTypeDAO = new TransactionTypesDAO();
 	}
 	
-	@SuppressWarnings("null")
+
 	public List<Transactions> getTransactionsbyAccountId(int accountId) {
-		List<Transactions> transactions = null;
+		List<Transactions> transactions = new ArrayList<Transactions>();
 		String sql="select * from transactions where account_id=?;";
 
 		//For Select statement we can use Connection Interface
@@ -40,8 +40,8 @@ public class TransactionsDAO {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
 			stmt.setInt(1, accountId);
 
-			ResultSet rs=(ResultSet) stmt.executeQuery(sql);
-			if(rs.next())
+			ResultSet rs=(ResultSet) stmt.executeQuery();
+			while(rs.next())
 			{
 				Account account = this.accountDAO.getAccountById(accountId);
 				TransactionType transactionType = this.transactionTypeDAO.getTransactionTypeByCode(rs.getString("transaction_code"));
@@ -51,13 +51,11 @@ public class TransactionsDAO {
 						account, 
 						rs.getFloat("amount"), 
 						rs.getDate("created_date"), 
-						transactionType
+						transactionType,
+						rs.getInt("to_account_id")
 						);
 				transactions.add(transaction);
 				 
-			}
-			else {
-				transactions = new ArrayList<Transactions>();
 			}
 		} 	
 		catch (SQLException e) {
@@ -68,8 +66,8 @@ public class TransactionsDAO {
 	
 	public int AddTransaction(Transactions transaction) {
 		int status = 0;
-		String sql="insert into transactions(account_id, amount, transaction_code) "
-				+ "values(?,?,?)";
+		String sql="insert into transactions(account_id, amount, transaction_code, to_account_id) "
+				+ "values(?,?,?, ?)";
 
 		//For Select statement we can use Connection Interface
 		try {
@@ -77,8 +75,8 @@ public class TransactionsDAO {
 			stmt.setInt(1, transaction.getAccount().getId());
 			stmt.setFloat(2, transaction.getAmount());
 			stmt.setString(3, transaction.getTransactionType().getTransaction_code());
+			stmt.setInt(4, transaction.getTo_account_id());
 
-			
 			status=stmt.executeUpdate();
 			if(status>0)
 			{

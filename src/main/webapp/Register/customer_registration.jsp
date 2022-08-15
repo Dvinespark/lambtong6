@@ -13,13 +13,8 @@
 					<h2>New Customer Registration</h2>
 					<p></p>
 				</div>
-				<form method="post" action="login">
+				<form method="post" action="register">
 
-					<div class="form-group">
-						<input type="text" class="form-control" id="username"
-							name="username" placeholder="username">
-
-					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" id="firstname"
 							name="firstname" placeholder="First Name">
@@ -31,21 +26,11 @@
 
 					</div>
 					<div class="form-group">
-						<input type="email" class="form-control" id="e-mail" name="e-mail"
+						<input type="email" class="form-control" id="e-mail" name="email"
 							placeholder="E-mail">
 
 					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" id="password1"
-							name="password1" placeholder="Password">
-
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" id="password2"
-							name="password2" placeholder="Confirm Password">
-
-					</div>
-
+					
 					<div class="form-group">
 						<input type="text" class="form-control" id="address"
 							name="address" placeholder="Address">
@@ -56,7 +41,7 @@
 							placeholder="Age">
 
 					</div>
-					<button type="submit" class="btn btn-primary">Login</button>
+					<button type="submit" class="btn btn-primary">Register Account</button>
 
 				</form>
 			</div>
