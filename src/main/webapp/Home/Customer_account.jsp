@@ -29,7 +29,7 @@ for account create page we need
 		<div class="login-form">
 			<div class="main-div">
 				<div class="panel">
-					<h2>New Customer Registration</h2>
+					<h2>New Customer Bank A/c Registration</h2>
 					<p></p>
 				</div>
 				<form method="post" action="login">
