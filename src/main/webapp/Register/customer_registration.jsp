@@ -56,7 +56,7 @@
 							placeholder="Age">
 
 					</div>
-					<button type="submit" class="btn btn-primary">Login</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
 
 				</form>
 			</div>
