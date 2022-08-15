@@ -18,7 +18,7 @@ public class Forgot_Password extends HttpServlet {
     /**
      * Default constructor. 
      */
-    public Forgot_Password() {
+    public Forgot_Password() { 
         // TODO Auto-generated constructor stub
     }
 

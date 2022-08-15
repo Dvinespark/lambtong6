@@ -19,8 +19,8 @@
 					<div class="form-group">
 
 					<div class="form-group">
-						<input type="text" class="form-control" id="full_name"
-							name="full_name" placeholder="Full Name">
+						<input type="number" class="form-control" id="sin"
+							name="sin" placeholder="SIN Number">
 
 					</div>
 						</div>
