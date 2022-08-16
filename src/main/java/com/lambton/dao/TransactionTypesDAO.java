@@ -21,7 +21,6 @@ public class TransactionTypesDAO {
 		this.con = dbConnection.getConnection();
 	}
 	
-	@SuppressWarnings("null")
 	public List<TransactionType> getTransactionTypeList() {
 		List<TransactionType> transactionTypes = new ArrayList<TransactionType>();
 		String sql="select * from transaction_types;";

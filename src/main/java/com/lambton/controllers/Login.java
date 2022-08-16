@@ -39,6 +39,11 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("get: /lambtong6/login page");
+		// update session
+		HttpSession session = request.getSession();
+		SessionHandler sessionHandler = (SessionHandler) session.getAttribute("lambton_session");
+		sessionHandler.page_title = "login";
+		session.setAttribute("lambton_session", sessionHandler);
 		
 		if (request.getParameter("logout")!= null) {
 			logout(request, response);
@@ -67,26 +72,26 @@ public class Login extends HttpServlet {
 		if (login_type.equals("admin")){
 			agent = agentDAO.login(username, password);
 			if (agent.getId() != 0) {
-				sessionHandler = new SessionHandler(agent.getId(), 0, true, "Admin", "Admin Login Success", login_type, agent.getFirstname(),"");
+				sessionHandler = new SessionHandler(agent.getId(), 0, true, "login", "Admin Login Success", login_type, agent.getFirstname(),"");
 				session.setAttribute("lambton_session", sessionHandler);
 				response.sendRedirect(request.getContextPath() + "/agent");
 				return;
 			}
 			else {
-				sessionHandler = new SessionHandler(0, 0, false, "Admin", "Admin does not exist.", login_type, "","");
+				sessionHandler = new SessionHandler(0, 0, false, "login", "Admin does not exist.", login_type, "","");
 				session.setAttribute("lambton_session", sessionHandler);
 			}
 		}
 		else if(login_type.equals("customer")) {
 			customer = customerDAO.login(username, password);
 			if (customer.getId() != 0) {
-				sessionHandler = new SessionHandler(0, customer.getId(), true, "Customer", "Customer Login Success", login_type, customer.getFirstname(),"");
+				sessionHandler = new SessionHandler(0, customer.getId(), true, "login", "Customer Login Success", login_type, customer.getFirstname(),"");
 				session.setAttribute("lambton_session", sessionHandler);
 				response.sendRedirect(request.getContextPath() + "/customer");
 				return;
 			}
 			else {
-				sessionHandler = new SessionHandler(0, 0, false, "Customer", "Customer account does not exist.", login_type, "","");
+				sessionHandler = new SessionHandler(0, 0, false, "login", "Customer account does not exist.", login_type, "","");
 				session.setAttribute("lambton_session", sessionHandler);
 			}
 		}	

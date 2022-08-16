@@ -1,6 +1,6 @@
 
 <%@include file="/parts/header.jsp"%>
-<%@ page import= "java.util.*, com.lambton.models.*" %>
+<%@ page import="java.util.*, com.lambton.models.*"%>
 
 <%
 Customer customer = (Customer) request.getAttribute("customer");
@@ -35,10 +35,10 @@ List<Account> accounts = (List<Account>) request.getAttribute("accounts");
 	<h2 class="card-title">Customer information:</h2>
 	<div class="card">
 		<ul class="list-group list-group-flush">
-			<li class="list-group-item">Name: <%= customer.getFirstname() + " " + customer.getLastname() %></li>
-			<li class="list-group-item">Address: <%=customer.getAddress()%>
-				C2D
-			</li>
+			<li class="list-group-item">Name: <%=customer.getFirstname() + " " + customer.getLastname()%></li>
+			<li class="list-group-item">Address: <%=customer.getAddress()%></li>
+			<li class="list-group-item">Contact No: <%=customer.getPhone_no()%></li>
+			<li class="list-group-item">SIN No: <%=customer.getSin_no()%></li>
 			<li class="list-group-item">Registered Date: <%=customer.getCreated_date().toString()%></li>
 		</ul>
 	</div>
@@ -46,38 +46,27 @@ List<Account> accounts = (List<Account>) request.getAttribute("accounts");
 
 <div class="container p-5">
 	<h2 class="card-title">Your Accounts:</h2>
-	<div class="d-flex flex-row">
-	<%for (int i=0; i< accounts.size(); i++){
-		
-	} %>
-		<div class="card w-50">
-			<div class="card-body">
-				<h5 class="card-title">Chequing</h5>
-				<p class="card-text">A/c no : XX34 Bal: $$$$</p>
-				<a href="#" class="btn btn-primary">View Statement</a>
+		<div class="row p-2">
+			<%
+			for (int i = 0; i < accounts.size(); i++) {
+			%>
+			<div class="col-6" style="min-width:250px;">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title"><%= accounts.get(i).getBank().getName() %> Bank - Account Type <%= accounts.get(i).getAccountTypes().getAccount_types_code() %></h5>
+						<p class="card-text">A/c no : <%= accounts.get(i).getId() %></p>
+						<p class="card-text">A/c created date : <%= accounts.get(i).getCreated_date().toString() %></p>
+						<p class="card-text">Current Balance : $<%= accounts.get(i).getBalance() %></p>
+						<a href="<%= request.getContextPath() + "/view_account?account_id=" + accounts.get(i).getId() %>" class="btn btn-primary">Go to account</a>
+					</div>
+				</div>
 			</div>
+			<%
+			}
+			%>
 		</div>
 
-		<div class="card w-50">
-			<div class="card-body">
-				<h5 class="card-title">Savings</h5>
-				<p class="card-text">A/c no : XX34 Bal: $$$$</p>
-				<a href="#" class="btn btn-primary">View Statement</a>
-			</div>
-		</div>
 
-	</div>
-
-	<div class="d-flex flex-row">
-		<div class="card w-50">
-			<div class="card-body">
-				<h5 class="card-title">VISA Credit</h5>
-				<p class="card-text">A/c no : XX34 Bal: $$$$</p>
-				<a href="#" class="btn btn-primary">View Statement</a>
-			</div>
-		</div>
-
-	</div>
 </div>
 
 <%@include file="/parts/footer.jsp"%>

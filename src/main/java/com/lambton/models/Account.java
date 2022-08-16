@@ -22,6 +22,17 @@ public class Account {
 		this.created_date = created_date;
 		this.balance = balance;
 	}
+	
+	public Account(int customer_id, AccountTypes accountTypes, Bank bank, float balance) {
+		super();
+
+		this.customer_id = customer_id;
+		this.accountTypes = accountTypes;
+		this.bank = bank;
+		this.balance = balance;
+	}
+	
+	
 	public int getId() {
 		return id;
 	}

@@ -11,9 +11,11 @@ List<Customer> customers = (List<Customer>)request.getAttribute("customers");
 		<div class="main-div">
 			<div class="panel">
 				<h2>Account Setup</h2>
-				<p></p>
+						<% if ((session_obj.message.length() > 0) && session_obj.page_title.equals("account")){%>
+			<div class="alert-success mt-5 text-center"> <p><%= session_obj.message %></p></div>			
+		<%}%>
 			</div>
-			<form method="post" action="login">
+			<form method="post" action="account">
 				<div class="form-group">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">

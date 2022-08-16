@@ -43,7 +43,7 @@ public class AccountDAO {
 			while(rs.next())
 			{
 				Bank bank = this.bankDAO.getBankById(rs.getInt("bank_id"));
-				AccountTypes accountTypes = this.accountTypesDAO.getAccountTypesByCode("account_types_code");				
+				AccountTypes accountTypes = this.accountTypesDAO.getAccountTypesByCode(rs.getString("account_types_code"));				
 				Account account = new Account(rs.getInt("id"),rs.getInt("customer_id"), accountTypes, bank,
 						rs.getDate("created_date"), rs.getFloat("balance"));
 				accounts.add(account);
@@ -89,19 +89,18 @@ public class AccountDAO {
 	
 	public int createAccount(Account account) {
 		int status = 0;
-		String sql="insert into accounts(id, customer_id, account_types_code, bank_id, balance) "
-				+ "values(?,?,?,?,?)";
+		String sql="insert into account(customer_id, account_types_code, bank_id, balance) "
+				+ "values(?,?,?,?)";
 		
 
 		//For Select statement we can use Connection Interface
 		try {
 			
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
-			stmt.setInt(1, account.getId());
-			stmt.setInt(2, account.getCustomer_id());
-			stmt.setString(3, account.getAccountTypes().getAccount_types_code());
-			stmt.setInt(4, account.getBank().getId());
-			stmt.setFloat(5, account.getBalance());
+			stmt.setInt(1, account.getCustomer_id());
+			stmt.setString(2, account.getAccountTypes().getAccount_types_code());
+			stmt.setInt(3, account.getBank().getId());
+			stmt.setFloat(4, account.getBalance());
 
 			status=stmt.executeUpdate();
 			if(status>0)
@@ -131,8 +130,6 @@ public class AccountDAO {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
 			stmt.setFloat(1, transaction_amount);
 			stmt.setInt(2, account_id);
-
-
 			status=stmt.executeUpdate();
 			if(status>0)
 			{
@@ -150,7 +147,7 @@ public class AccountDAO {
 	}
 	
 	public Account getAccountById(int account_id) {
-		Account account = null;
+		Account account = new Account();
 		String sql="select * from account where id=?;";
 
 		//For Select statement we can use Connection Interface
@@ -163,13 +160,10 @@ public class AccountDAO {
 			if(rs.next())
 			{
 				Bank bank = this.bankDAO.getBankById(rs.getInt("bank_id"));
-				AccountTypes accountTypes = this.accountTypesDAO.getAccountTypesByCode("account_types_code");				
+				AccountTypes accountTypes = this.accountTypesDAO.getAccountTypesByCode(rs.getString("account_types_code"));				
 				account = new Account(rs.getInt("id"),rs.getInt("customer_id"), accountTypes, bank,
 						rs.getDate("created_date"), rs.getFloat("balance"));
 				 
-			}
-			else {
-				account = new Account();
 			}
 		} 	
 		catch (SQLException e) {

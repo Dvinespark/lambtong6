@@ -32,7 +32,7 @@ public class TransactionsDAO {
 
 	public List<Transactions> getTransactionsbyAccountId(int accountId) {
 		List<Transactions> transactions = new ArrayList<Transactions>();
-		String sql="select * from transactions where account_id=?;";
+		String sql="select * from transactions where from_account_id=? order by created_at desc limit 10;";
 
 		//For Select statement we can use Connection Interface
 		try {
@@ -43,16 +43,17 @@ public class TransactionsDAO {
 			ResultSet rs=(ResultSet) stmt.executeQuery();
 			while(rs.next())
 			{
-				Account account = this.accountDAO.getAccountById(accountId);
+				Account from_account = this.accountDAO.getAccountById(accountId);
+				Account to_account = this.accountDAO.getAccountById(rs.getInt("to_account_id"));
 				TransactionType transactionType = this.transactionTypeDAO.getTransactionTypeByCode(rs.getString("transaction_code"));
 				
 				Transactions transaction = new Transactions(
 						rs.getInt("id"), 
-						account, 
+						from_account, 
 						rs.getFloat("amount"), 
-						rs.getDate("created_date"), 
+						rs.getDate("created_at"), 
 						transactionType,
-						rs.getInt("to_account_id")
+						to_account
 						);
 				transactions.add(transaction);
 				 
@@ -66,22 +67,20 @@ public class TransactionsDAO {
 	
 	public int AddTransaction(Transactions transaction) {
 		int status = 0;
-		String sql="insert into transactions(account_id, amount, transaction_code, to_account_id) "
-				+ "values(?,?,?, ?)";
+		String sql="insert into transactions(from_account_id, amount, transaction_code, to_account_id) "
+				+ "values(?,?,?,?)";
 
 		//For Select statement we can use Connection Interface
 		try {
 			PreparedStatement stmt=(PreparedStatement) con.prepareStatement(sql);
-			stmt.setInt(1, transaction.getAccount().getId());
+			stmt.setInt(1, transaction.getFromAccount().getId());
 			stmt.setFloat(2, transaction.getAmount());
 			stmt.setString(3, transaction.getTransactionType().getTransaction_code());
-			stmt.setInt(4, transaction.getTo_account_id());
+			stmt.setInt(4, transaction.getToAccount().getId());
 
 			status=stmt.executeUpdate();
 			if(status>0)
 			{
-				// write logic here to add or subtract amount from bank
-//				if (transaction.getTransactionType().getTransaction_code())
 				System.out.println("Record inserted successfully");
 			}
 			else

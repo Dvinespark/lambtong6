@@ -14,7 +14,7 @@ CREATE TABLE AGENT (
     PRIMARY KEY(id)
 );
 
-ALTER TABLE AGENT AUTO_INCREMENT=100;
+ALTER TABLE AGENT AUTO_INCREMENT=1000;
 
 -- account types
 CREATE TABLE ACCOUNT_TYPES ( 
@@ -29,8 +29,8 @@ CREATE TABLE BANK (
 );
 ALTER TABLE BANK AUTO_INCREMENT = 1000;
 
-
-CREATE TABLE ACCOUNT (
+-- DROP TABLE CUSTOMER;
+CREATE TABLE CUSTOMER (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	agent_id INT NOT NULL,
     firstname NVARCHAR(50) NOT NULL,
@@ -38,10 +38,21 @@ CREATE TABLE ACCOUNT (
     age INT NOT NULL,
 	username NVARCHAR(50) NOT NULL,
     password NVARCHAR(30) NOT NULL,
+    email_verify BOOLEAN DEFAULT FALSE,
 	email NVARCHAR(100) NOT NULL,
+    address NVARCHAR(100)  NOT NULL,
+    created_date DATE DEFAULT current_timestamp,
+    phone_no NVARCHAR(15),
+    sin_no BIGINT NOT NULL,
+	CONSTRAINT fk_agent_id
+    foreign key(agent_id) REFERENCES AGENT(id)
+);
+
+CREATE TABLE ACCOUNT (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	customer_id INT NOT NULL,
     account_types_code NVARCHAR(15) NOT NULL,
     bank_id INT NOT NULL,
-    address NVARCHAR(100)  NOT NULL,
     created_date DATE DEFAULT current_timestamp,
     balance float(10,2) default 0,
 	CONSTRAINT fk_account_types_code
@@ -50,10 +61,10 @@ CREATE TABLE ACCOUNT (
 	CONSTRAINT fk_bank_id
     foreign key(bank_id) REFERENCES BANK(id),
     
-	CONSTRAINT fk_agent_id
-    foreign key(agent_id) REFERENCES AGENT(id)
+	CONSTRAINT fk_customer_id
+    foreign key(customer_id) REFERENCES CUSTOMER(id)
 );
-
+ALTER TABLE ACCOUNT AUTO_INCREMENT = 1000012;
 
 CREATE TABLE TRANSACTION_TYPES ( 
 	TRANSACTION_CODE NVARCHAR(30) NOT NULL PRIMARY KEY,
@@ -62,13 +73,17 @@ CREATE TABLE TRANSACTION_TYPES (
 
 CREATE TABLE TRANSACTIONS(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    account_id INT NOT NULL,
+    from_account_id INT NOT NULL,
     amount float(10, 2) NOT NULL,
     created_at DATE DEFAULT current_timestamp,
-    TRANSACTION_TYPE NVARCHAR(59) NOT NULL,
-    CONSTRAINT fk_account_id
-    foreign key(account_id) REFERENCES ACCOUNT(id)
+    transaction_code NVARCHAR(59) NOT NULL,
+    to_account_id INT,
+    CONSTRAINT fk_from_account_id
+    foreign key(from_account_id) REFERENCES ACCOUNT(id),
+	
+    CONSTRAINT fk_to_account_id
+    foreign key(to_account_id) REFERENCES ACCOUNT(id),
+    
+	CONSTRAINT fk_transaction_type_code
+    foreign key(transaction_code) REFERENCES TRANSACTION_TYPES(TRANSACTION_CODE)
 );
-
-
-

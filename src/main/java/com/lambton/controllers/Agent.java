@@ -33,17 +33,12 @@ public class Agent extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		SessionHandler sessionHandler = (SessionHandler) session.getAttribute("lambton_session");
+		sessionHandler.page_title = "agent";
+		session.setAttribute("lambton_session", sessionHandler);
+		
 		com.lambton.models.Agent agent = agentDAO.getAgentById(sessionHandler.agent_id);
 		request.setAttribute("agent", agent);
 		request.getRequestDispatcher("Agent/agent_dashboard.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

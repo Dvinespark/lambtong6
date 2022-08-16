@@ -25,7 +25,6 @@ public class Register extends HttpServlet {
 	String host = "localhost";
 	final String from_user = "lambtong6@gmail.com";// change accordingly
 	final String from_password = "mikdxlfomghitsav";// change accordingly
-
 	String to = "nimtsubash@gmail.com";// change accordingly
 
 	public Register() {
@@ -64,6 +63,7 @@ public class Register extends HttpServlet {
 		// get agent_id from session
 		HttpSession session = request.getSession();
 		SessionHandler sessionHandler = (SessionHandler) session.getAttribute("lambton_session");
+		sessionHandler.page_title = "register";
 
 		// step 1 get form data
 		String firstname = request.getParameter("firstname");
@@ -73,14 +73,17 @@ public class Register extends HttpServlet {
 		String username = generateUsername(firstname);
 		String password = generatePassword();
 		int age = Integer.valueOf(request.getParameter("age"));
+		String phone_no = request.getParameter("phone_no");
+		int sin_no = Integer.valueOf(request.getParameter("sin_no"));
+		System.out.println(sin_no);
 
 		// create customer object
 
 		com.lambton.models.Customer customer = new com.lambton.models.Customer(Integer.valueOf(sessionHandler.agent_id),
-				username, password, email, address, firstname, lastname, age, true);
+				username, password, email, address, firstname, lastname, age, true, phone_no, sin_no);
 		int result = 0;
-		if (customerDAO.checkIfCustomerExists(customer) == 0) {
-			sessionHandler.error_message = "Customer with given information already exists";
+		if (customerDAO.checkIfCustomerExists(customer) == 1) {
+			sessionHandler.message = "Customer with given information already exists";
 			session.setAttribute("lambton_session", sessionHandler);
 			doGet(request, response);
 			return;
@@ -103,7 +106,7 @@ public class Register extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/agent");
 			return;
 		}
-
+		session.setAttribute("lambton_session", sessionHandler);
 		doGet(request, response);
 	}
 
@@ -114,7 +117,7 @@ public class Register extends HttpServlet {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable","true");
         props.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
-        props.setProperty("mail.debug", "true");
+//        props.setProperty("mail.debug", "true");
         
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -127,7 +130,10 @@ public class Register extends HttpServlet {
 			message.setFrom(new InternetAddress(from_user));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
 			message.setSubject("LambtonG6 Credentials");
-			message.setText("Username: " + username + "\nPassword: " + password);
+			message.setText("Welcome to LambtonG6 Bank! \nYour account has been successfully set up.\n"
+					+ "Please log in to this site: http:\\\\localhost:8080\\login\n"
+					+ "with following credentials\n"
+					+ "Username: " + username + "\nPassword: " + password);
 
 			// send the message
 			Transport.send(message);

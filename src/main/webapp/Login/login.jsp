@@ -51,7 +51,7 @@
 							if (session_obj.login_flag == false) {
 							%>
 							<div class="col-4">
-								<a id="_create_account" href="<%= request.getContextPath() + "/recover_account" %>">Forgot Password</a>
+								<a id="_create_account" href="<%= request.getContextPath() + "/accountRecover" %>">Forgot Password</a>
 							</div>
 
 							<%

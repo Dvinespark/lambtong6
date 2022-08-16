@@ -4,36 +4,40 @@ import java.sql.Date;
 
 public class Transactions {
 	private int id;
-	private Account account;
+	private Account fromAccount;
 	private float amount;
 	private Date created_at;
 	private TransactionType transactionType;
-	private int to_account_id;
+	private Account toAccount;
 	public Transactions() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Transactions(int id, Account account, float amount, Date created_at, TransactionType transactionType, int to_account_id) {
+	public Transactions(int id, Account from_account, float amount, Date created_at, TransactionType transactionType, Account to_account) {
 		super();
 		this.id = id;
-		this.account = account;
+		this.fromAccount = from_account;
 		this.amount = amount;
 		this.created_at = created_at;
 		this.transactionType = transactionType;
-		this.to_account_id = to_account_id;
+		this.toAccount = to_account;
 	}
+	
+	public Transactions(Account from_account, float amount,TransactionType transactionType, Account to_account) {
+		super();
+		this.fromAccount = from_account;
+		this.amount = amount;
+		this.transactionType = transactionType;
+		this.toAccount = to_account;
+	}
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Account getAccount() {
-		return account;
-	}
-	public void setAccount(Account account) {
-		this.account = account;
-	}
+
 	public float getAmount() {
 		return amount;
 	}
@@ -52,12 +56,17 @@ public class Transactions {
 	public void setTransactionType(TransactionType transactionType) {
 		this.transactionType = transactionType;
 	}
-	public int getTo_account_id() {
-		return to_account_id;
+	public Account getFromAccount() {
+		return fromAccount;
 	}
-	public void setTo_account_id(int to_account_id) {
-		this.to_account_id = to_account_id;
+	public void setFromAccount(Account fromAccount) {
+		this.fromAccount = fromAccount;
 	}
-	
+	public Account getToAccount() {
+		return toAccount;
+	}
+	public void setToAccount(Account toAccount) {
+		this.toAccount = toAccount;
+	}
 	
 }

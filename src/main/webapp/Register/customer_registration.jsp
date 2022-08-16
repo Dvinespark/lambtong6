@@ -1,12 +1,12 @@
 <%@include file="/parts/header.jsp"%>
 
 
-<title>Customer Registration</title>
-
 
 <div id="LoginForm">
 	<div class="container pt-5" style="height: 730px;">
-
+		<% if (session_obj.message.length() > 0 && session_obj.page_title.equals("register")){%>
+			<div class="alert-success mt-5 text-center"> <p><%= session_obj.message %></p></div>			
+		<%}%>
 		<div class="login-form">
 			<div class="main-div">
 				<div class="panel">
@@ -39,6 +39,16 @@
 					<div class="form-group">
 						<input type="number" class="form-control" id="age" name="age"
 							placeholder="Age">
+
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="phone_no"
+							name="phone_no" placeholder="Phone no.">
+
+					</div>
+					<div class="form-group">
+						<input type="number" class="form-control" id="sin_no" name="sin_no"
+							placeholder="SIN No">
 
 					</div>
 					<button type="submit" class="btn btn-primary">Register Account</button>

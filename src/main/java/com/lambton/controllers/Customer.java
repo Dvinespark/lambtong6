@@ -33,20 +33,15 @@ public class Customer extends HttpServlet {
 		// get customer data
 		HttpSession session = request.getSession();
 		SessionHandler sessionHandler = (SessionHandler) session.getAttribute("lambton_session");
+		sessionHandler.page_title = "customer";
+		session.setAttribute("lambton_session", sessionHandler);
+		
 		com.lambton.models.Customer customer = customerDAO.getCusomerById(sessionHandler.customer_id);
 		List<com.lambton.models.Account> accounts = accountDAO.getAccounts(sessionHandler.customer_id);
 		request.setAttribute("customer", customer);
 		request.setAttribute("accounts", accounts);
 		
 		request.getRequestDispatcher("Customer/dashboard.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

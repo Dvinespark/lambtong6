@@ -34,7 +34,6 @@ public class BankDAO {
 			{
 				 Bank bank = new Bank(rs.getInt("id"),rs.getString("name"));
 				 banks.add(bank);
-				 System.out.println(bank);
 
 			}
 		} 	

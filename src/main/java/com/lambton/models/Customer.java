@@ -3,17 +3,19 @@ package com.lambton.models;
 import java.sql.Date;
 
 public class Customer {
-	private int id; ////no need
-	private int agent_id; ////no need
+	private int id;
+	private int agent_id;
 	private String username;
 	private String password;
 	private String email;
 	private String address;
 	private String firstname;
 	private String lastname;
-	private Date created_date; ////no need
+	private Date created_date;
 	private int age;
-	private boolean email_verify; //no need
+	private boolean email_verify;
+	private String phone_no;
+	private int sin_no;
 	
 	
 
@@ -28,7 +30,7 @@ public class Customer {
 
 
 	public Customer(int agent_id, String username, String password, String email, String address,
-			String firstname, String lastname, int age, boolean email_verify) {
+			String firstname, String lastname, int age, boolean email_verify, String phone_no, int sin_no) {
 		super();
 		this.agent_id = agent_id;
 		this.username = username;
@@ -39,14 +41,14 @@ public class Customer {
 		this.lastname = lastname;
 		this.age = age;
 		this.email_verify = email_verify;
+		this.phone_no = phone_no;
+		this.sin_no = sin_no;
 	}
-
-
-
-
+	
 
 	public Customer(int id, int agent_id, String username, String password, String email, String address,
-			String firstname, String lastname, Date created_date, int age, boolean email_verify) {
+			String firstname, String lastname, Date created_date, int age, boolean email_verify, String phone_no,
+			int sin_no) {
 		super();
 		this.id = id;
 		this.agent_id = agent_id;
@@ -59,8 +61,13 @@ public class Customer {
 		this.created_date = created_date;
 		this.age = age;
 		this.email_verify = email_verify;
+		this.phone_no = phone_no;
+		this.sin_no = sin_no;
 	}
-	
+
+
+
+
 
 	public int getId() {
 		return id;
@@ -179,5 +186,39 @@ public class Customer {
 	public void setEmail_verify(boolean email_verify) {
 		this.email_verify = email_verify;
 	}
+
+
+
+
+
+	public String getPhone_no() {
+		return phone_no;
+	}
+
+
+
+
+
+	public void setPhone_no(String phone_no) {
+		this.phone_no = phone_no;
+	}
+
+
+
+
+
+	public int getSin_no() {
+		return sin_no;
+	}
+
+
+
+
+
+	public void setSin_no(int sin_no) {
+		this.sin_no = sin_no;
+	}
+	
+	
 	
 }

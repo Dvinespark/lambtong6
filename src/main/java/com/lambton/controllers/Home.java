@@ -25,7 +25,7 @@ public class Home extends HttpServlet {
 		System.out.println("get: /lambtong6");
 		session = request.getSession();
 		if (session.getAttribute("lambton_session") == null) {
-			sessionHandler = new SessionHandler(0,0,false,"Home", "","","","");
+			sessionHandler = new SessionHandler(0,0,false,"home", "","","","");
 			session.setAttribute("lambton_session", sessionHandler);
 		}
 		
@@ -33,13 +33,4 @@ public class Home extends HttpServlet {
 
 	}
 	
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("Post method triggered.");	
-		response.sendRedirect("display.jsp");	
-	}
-	
-
-
 }
