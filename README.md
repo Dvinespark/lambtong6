@@ -3,18 +3,24 @@
 
 ### Programming Languages
 1. Backend
-    - Servlets
+    - Java
     - MySQL
 2. Frontend
-    - Html
-    - CSS
+    - Bootstrap Framework
     - JSP
-    - Js bootstrap framework
+    - Javascript
   
  
  ### Requirements
-    - Apache Tomcat v9.0
-    - Bootstrap (to be updated)
+    - Apache Tomcat v10.0
+    - Bootstrap V4
     - Dynamic web module 4.0
+    
+ ## Dependencies
+ 	- activation.jar -- mail
+ 	- mail.jar -- mail
+ 	- mysql-connector.jar -- db connect
+ 	- servlet-api.jar
+ 	- tomcat-api.jar
  
- This project uses Servelets and Sessions.
+ This project uses Servlets and for State management (Session tracking), we are using HttpSession
