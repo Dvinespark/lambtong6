@@ -46,6 +46,8 @@ CREATE TABLE CUSTOMER (
     foreign key(agent_id) REFERENCES AGENT(id)
 );
 
+alter table customer AUTO_INCREMENT = 100092;
+
 CREATE TABLE ACCOUNT (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	customer_id INT NOT NULL,

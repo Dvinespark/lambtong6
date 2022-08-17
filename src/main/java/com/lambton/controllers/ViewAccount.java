@@ -1,7 +1,6 @@
 package com.lambton.controllers;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -12,8 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import com.lambton.dao.TransactionsDAO;
-import com.lambton.models.Account;
-import com.lambton.models.TransactionType;
 import com.lambton.dao.AccountDAO;
 import com.lambton.dao.TransactionTypesDAO;
 import com.lambton.dao.BankDAO;
@@ -66,12 +63,22 @@ public class ViewAccount extends HttpServlet {
 		HttpSession session = request.getSession();
 		SessionHandler sessionHandler = (SessionHandler) session.getAttribute("lambton_session");
 
-		
+		int to_account;
 		int from_account = Integer.valueOf(request.getParameter("from_account"));
-		int to_account = Integer.valueOf(request.getParameter("to_account"));
 		String transaction_code = request.getParameter("transaction_code");
+		if (transaction_code.equals("Deposit Fund")) {
+			to_account = from_account;
+		}
+		else {
+			to_account = Integer.valueOf(request.getParameter("to_account"));
+		}
+
+		// haven't used these fields 
+		// future work
 		String name = request.getParameter("name");
 		int bank_id = Integer.valueOf(request.getParameter("bank_id"));
+		
+		
 		float amount = Float.valueOf(request.getParameter("amount"));
 	
 		// add to transaction object
@@ -85,18 +92,42 @@ public class ViewAccount extends HttpServlet {
 		
 		// add to database
 		int result = 0;
-		if (t_account != null) {
-			// check if balance exists
-			result = transactionsDAO.AddTransaction(transaction);		
+		int checkFlag = 0;
+		
+		if (transaction_code.equals("Deposit Fund")) {
+			// this means to your own account
+			transaction.setToAccount(f_account);
+			result = transactionsDAO.AddTransaction(transaction);
+			// update amount in account budget
+			accountDAO.updateAccountBalance(from_account, amount);
+			
 		}
+		else {
+			
+			if (t_account != null) {
+				// check if balance exists
+				if (f_account.getBalance() > amount) {
+					result = transactionsDAO.AddTransaction(transaction);
+					accountDAO.updateAccountBalance(from_account, -amount);
+					accountDAO.updateAccountBalance(to_account, amount);
+				}
+				else {
+					sessionHandler.message = "Insufficient amount.Operation failed.";
+					checkFlag = 1;
+				}
+							
+			}
+		}
+
 		
 		
-		if (result > 0) {
+		if (result > 0 && checkFlag == 0) {
 			// success
 			sessionHandler.message = "Operation completed successfully.";
 			
 		}
-		else {
+		
+		else if(checkFlag == 0 && result == 0) {
 			sessionHandler.message = "Something happened";
 		}
 		

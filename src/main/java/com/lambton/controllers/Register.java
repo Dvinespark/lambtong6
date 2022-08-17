@@ -25,7 +25,6 @@ public class Register extends HttpServlet {
 	String host = "localhost";
 	final String from_user = "lambtong6@gmail.com";// change accordingly
 	final String from_password = "mikdxlfomghitsav";// change accordingly
-	String to = "nimtsubash@gmail.com";// change accordingly
 
 	public Register() {
 

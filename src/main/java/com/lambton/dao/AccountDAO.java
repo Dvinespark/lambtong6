@@ -121,7 +121,7 @@ public class AccountDAO {
 	
 	public int updateAccountBalance(int account_id, float transaction_amount) {
 		int status = 0;
-		String sql="update account set balance = (balance-?) where id = ?;";
+		String sql="update account set balance = (balance+?) where id = ?;";
 		
 
 		//For Select statement we can use Connection Interface

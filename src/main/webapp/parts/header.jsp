@@ -63,7 +63,7 @@
 							if (session_obj.login_type.equals("admin")){%>
 								<li><a href="<%=request.getContextPath() + "/agent" %>" class="nav-link">Welcome <%= session_obj.firstname %></a></li>
 							<%}else {%>
-								<li><a href="#" class="nav-link">Welcome <%= session_obj.firstname %></a></li>
+								<li><a href="<%=request.getContextPath() + "/customer" %>" class="nav-link">Welcome <%= session_obj.firstname %></a></li>
 							<%} %>
 							<li><a href="<%=request.getContextPath() + "/login?logout=true" %>" class="nav-link">Log out</a></li>
 						<%}else {%>

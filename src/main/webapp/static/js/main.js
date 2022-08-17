@@ -354,4 +354,21 @@ $(document).ready(function() {
 		$("#login_type2").click(()=>{
 			$("#_create_account").show();
 	});
+	
+	
+	$('#transaction_code_view_contact').change(function() {
+
+    if ($(this).val() === 'Deposit Fund') {
+    	$("#to_account_viewAcc").hide();
+    	$("#bank_id_viewAcc").hide();
+    	$("#acc_holder_name").hide();
+    	
+        
+    }
+    else {
+        $("#to_account_viewAcc").show();
+    	$("#bank_id_viewAcc").show();
+    	$("#acc_holder_name").show();
+    }
+});
 });

@@ -28,7 +28,6 @@ public class AccountRecover extends HttpServlet {
 	String host = "localhost";
 	final String from_user = "lambtong6@gmail.com";
 	final String from_password = "mikdxlfomghitsav";
-	String to = "nimtsubash@gmail.com";
 	
 	private static final long serialVersionUID = 1L;
 
