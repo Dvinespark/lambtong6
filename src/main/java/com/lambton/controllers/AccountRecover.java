@@ -88,7 +88,7 @@ public class AccountRecover extends HttpServlet {
 
 			if (result > 0) {
 				// success
-				sendMessage(customer.getEmail(), customer.getUsername(), customer.getPassword());
+				sendMessage(customer.getEmail(), customer.getUsername(), new_password);
 				// send email and display message
 				sessionHandler.message = "Password has been updated and sent to Customers email address.";
 				

@@ -23,7 +23,7 @@ public class AgentDAO {
 	}
 	
 	public Agent login(String username, String password) {
-		Agent agent = null;
+		Agent agent = new Agent();
 		String sql="SELECT * FROM agent WHERE username = ? AND password = ?;";
 
 		//For Select statement we can use Connection Interface
@@ -36,9 +36,6 @@ public class AgentDAO {
 			{
 				 agent= new Agent(rs.getInt("id"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("password"));
 
-			}
-			else {
-				agent = new Agent();
 			}
 		} 	
 		catch (SQLException e) {
